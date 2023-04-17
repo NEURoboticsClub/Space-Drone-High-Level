@@ -9,4 +9,4 @@ class DroneView(ABC):
 
     @abstractmethod
     async def display(self):
-        pass # Display current pose
+        pass
