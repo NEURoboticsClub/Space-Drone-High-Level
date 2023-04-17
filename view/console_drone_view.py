@@ -7,4 +7,5 @@ class ConsoleDroneView(DroneView):
         super().__init__(drone)
 
     def display(self):
-        print("Current pose")
+        
+        print(f"Current pose: {self.drone.return_position()}")

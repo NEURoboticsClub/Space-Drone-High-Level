@@ -42,6 +42,8 @@ class Controller:
 
             delay = self.view.get_delay()
 
+            self.view.display_drone()
+
             self.view.arm()
             await self.model.vehicle.arm()
 
@@ -54,7 +56,18 @@ class Controller:
             await self.model.vehicle.land()
 
         if flight_mode == FlightMode.mission:
-            pass # Code for mission
+
+            mission_points = self.view.get_mission(self.model)
+
+            for point in mission_points:
+                self.model.mission.add_mission_point(point[0], point[1])
+
+            self.model.vehicle.upload_mission(self.model.mission.get_mission())
+
+            self.view.arm()
+            await self.model.vehicle.arm()
+
+            await self.model.vehicle.start_mission()
         
 
             

@@ -7,6 +7,9 @@ class Drone:
         self.address = address
         self.drone = System()
 
+    def return_position(self):
+        return self.drone.info.get_flight_information()
+
     async def connect(self):
         await self.drone.connect(system_address=self.address)
         

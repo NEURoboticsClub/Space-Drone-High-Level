@@ -3,12 +3,14 @@ from mavsdk import System
 
 from model.drone import Drone
 from model.calibrator import Calibrator
+from model.mission import Mission
 
 class FlightControl():
     
     def __init__(self) -> None:
         self.vehicle = Drone()
         self.calibrator = Calibrator(self.vehicle)
+        self.mission = Mission()
 
 
     async def connect(self):
@@ -24,6 +26,7 @@ class FlightControl():
 
     async def return_to_launch(self, state):
         await self.vehicle.drone.mission.set_return_to_launch_after_mission(state)
+
 
 
     

@@ -11,7 +11,7 @@ class ConsoleFlightView(FlightView):
         result = input("Do you want to calibrate the drone? (y/n): ")
         return result.lower() == "y" 
 
-    def get_flight_mode(self):
+    def get_flight_mode(self): 
         print("Please select the flight mode from the following options: ")
         print("1 - Takeoff and Land")
         print("2 - Mission")
@@ -21,6 +21,18 @@ class ConsoleFlightView(FlightView):
     def get_delay(self):
         result = input("Please specify the duration of flight: ")
         return int(result)
+    
+    def get_mission(self, model):
+        print("Please enter your mission points: ")
+        mission = []
+        while True:
+            point = input("Enter the next mission point (latitude, longtitude) or 0 to end :")
+            if int(point[0]) == 0:
+                break
+            coordinates = [float(num) for num in point.split("")]
+            mission.append((coordinates[0], coordinates[1]))
+
+        return mission
     
     def try_connect(self):
         print("***Trying to connect...***")
