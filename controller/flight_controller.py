@@ -9,7 +9,7 @@ class Controller:
         self.model = model
         self.view = view
 
-    async def fly(self, flight_mode, calibrate = False, mission = None, delay = 0):
+    async def fly(self):
         self.view.try_connect()
         await self.model.connect()
         self.view.connected()
@@ -17,6 +17,10 @@ class Controller:
         self.view.check_position()
         await self.model.check_position()
         self.view.valid_position()
+
+        calibrate = self.view.get_calibrate()
+
+        flight_mode = self.view.get_flight_mode()
 
         if calibrate:
             pass # Calibration code
@@ -28,6 +32,8 @@ class Controller:
             self.view.takeoff()
             await self.model.vehicle.takeoff()
             
+            delay = self.view.get_delay()
+
             await asyncio.sleep(delay)
 
             self.view.land()
