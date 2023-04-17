@@ -42,7 +42,7 @@ class Controller:
 
             delay = self.view.get_delay()
 
-            self.view.display_drone()
+            await self.view.display_drone()
 
             self.view.arm()
             await self.model.vehicle.arm()

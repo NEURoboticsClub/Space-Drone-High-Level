@@ -1,3 +1,5 @@
+import asyncio
+
 from abc import ABC, abstractmethod
 from view.drone_view import DroneView
 
@@ -33,5 +35,5 @@ class FlightView(ABC):
     def land(self):
         pass
 
-    def display_drone(self):
-        self.drone_view.display()
+    async def display_drone(self):
+        await self.drone_view.display()

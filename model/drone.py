@@ -7,8 +7,14 @@ class Drone:
         self.address = address
         self.drone = System()
 
-    def return_position(self):
-        return self.drone.info.get_flight_information()
+    async def return_position(self):
+        result = []
+        async for data in self.drone.telemetry.home():
+            result.append(data.latitude_deg)
+            result.append(data.longitude_deg)
+            break
+
+        self.position = result
 
     async def connect(self):
         await self.drone.connect(system_address=self.address)

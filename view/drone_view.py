@@ -1,3 +1,5 @@
+import asyncio
+
 from abc import ABC, abstractmethod
 from model.drone import Drone
 
@@ -6,5 +8,5 @@ class DroneView(ABC):
         self.drone = drone
 
     @abstractmethod
-    def display(self):
+    async def display(self):
         pass # Display current pose
