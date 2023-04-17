@@ -7,11 +7,23 @@ class ConsoleFlightView(FlightView):
         drone_view = ConsoleDroneView(drone)
         super().__init__(drone_view)
 
+    def try_connect(self):
+        print("***Trying to connect...***")
+
+    def connected(self):
+        print("***Connected successfully!***")
+
+    def check_position(self):
+        print("***Checking GPS Position***")
+
+    def valid_position(self):
+        print("***GPS Position Valid***")
+    
     def arm(self):
-        print("Armed")
+        print("***Armed***")
 
     def takeoff(self):
-        print("Taking off")
+        print("***Taking off***")
 
     def land(self):
-        print("Landing")
+        print("***Landing***")

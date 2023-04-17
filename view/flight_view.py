@@ -6,6 +6,22 @@ class FlightView(ABC):
         self.drone_view = drone_view
 
     @abstractmethod
+    def try_connect(self):
+        pass
+    
+    @abstractmethod
+    def connected(self):
+        pass
+    
+    @abstractmethod
+    def check_position(self):
+        pass
+
+    @abstractmethod
+    def valid_position(self):
+        pass
+
+    @abstractmethod
     def arm(self):
         pass
 

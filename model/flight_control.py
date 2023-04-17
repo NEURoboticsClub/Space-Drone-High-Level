@@ -21,13 +21,11 @@ class FlightControl():
         await self.vehicle.connect()
         async for state in self.vehicle.drone.core.connection_state():
             if state.is_connected:
-                print(f"-- Connected to drone!") # take out and move to view
                 break
 
     async def check_position(self):
         async for health in self.vehicle.drone.telemetry.health():
             if health.is_global_position_ok and health.is_home_position_ok:
-                print("-- Global position estimate OK") # take out and move to view
                 break
 
     async def return_to_launch(self):

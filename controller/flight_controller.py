@@ -10,8 +10,13 @@ class Controller:
         self.view = view
 
     async def fly(self, flight_mode, calibrate = False, mission = None, delay = 0):
+        self.view.try_connect()
         await self.model.connect()
+        self.view.connected()
+
+        self.view.check_position()
         await self.model.check_position()
+        self.view.valid_position()
 
         if calibrate:
             pass # Calibration code
