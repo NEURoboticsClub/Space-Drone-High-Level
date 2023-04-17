@@ -25,5 +25,8 @@ class Drone:
     async def land(self):
         await self.drone.action.land()
 
+    async def disarm(self):
+        await self.drone.action.disarm()
+
         
     

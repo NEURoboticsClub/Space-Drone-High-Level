@@ -32,6 +32,7 @@ class FlightControl():
         await self.vehicle.drone.mission.set_return_to_launch_after_mission(True)
 
     async def terminate(self):
+        await self.vehicle.disarm()
         #self.status_text_task.cancel()
         if self.termination_task != None:
             await self.termination_task
