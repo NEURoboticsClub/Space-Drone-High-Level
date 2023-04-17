@@ -62,7 +62,7 @@ class Controller:
             for point in mission_points:
                 self.model.mission.add_mission_point(point[0], point[1])
 
-            self.model.vehicle.upload_mission(self.model.mission.get_mission())
+            await self.model.vehicle.upload_mission(self.model.mission.get_mission())
 
             self.view.arm()
             await self.model.vehicle.arm()

@@ -26,10 +26,10 @@ class ConsoleFlightView(FlightView):
         print("Please enter your mission points: ")
         mission = []
         while True:
-            point = input("Enter the next mission point (latitude, longtitude) or 0 to end :")
+            point = input("Enter the next mission point (latitude, longitude) or 0 to end :")
             if int(point[0]) == 0:
                 break
-            coordinates = [float(num) for num in point.split("")]
+            coordinates = [float(num) for num in point.split(",")]
             mission.append((coordinates[0], coordinates[1]))
 
         return mission
