@@ -23,23 +23,35 @@ class Controller:
         flight_mode = self.view.get_flight_mode()
 
         if calibrate:
-            pass # Calibration code
+
+            self.view.calibrate()
+
+            await(self.model.calibrator.gyroscope())
+            self.view.gyroscope_calibrated()
+
+            await(self.model.calibrator.accelerometer())
+            self.view.accelerometer_calibrated()
+
+            await(self.model.calibrator.magnetometer())
+            self.view.magnetometer_calibrated()
+
+            await(self.model.calibrator.board_level())
+            self.view.board_level_calibrated()
 
         if flight_mode == FlightMode.takeoff_and_land:
+
+            delay = self.view.get_delay()
+
             self.view.arm()
             await self.model.vehicle.arm()
 
             self.view.takeoff()
             await self.model.vehicle.takeoff()
-            
-            delay = self.view.get_delay()
 
             await asyncio.sleep(delay)
 
             self.view.land()
             await self.model.vehicle.land()
-
-            await self.model.terminate()
 
         if flight_mode == FlightMode.mission:
             pass # Code for mission

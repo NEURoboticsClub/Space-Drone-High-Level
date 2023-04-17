@@ -2,20 +2,16 @@ from model.drone import Drone
 
 class Calibrator:
     def __init__(self, drone: Drone) -> None:
-        self.drone = drone
+        self.drone = drone.drone
 
     async def gyroscope(self):
-        async for progress_data in self.drone.calibration.calibrate_gyro():
-            print(progress_data)
+        self.drone.calibration.calibrate_gyro()
 
     async def accelerometer(self):
-        async for progress_data in self.drone.calibration.calibrate_accelerometer():
-            print(progress_data)
+        self.drone.calibration.calibrate_accelerometer()
 
     async def magnetometer(self):
-        async for progress_data in self.drone.calibration.calibrate_magnetometer():
-            print(progress_data)
+        self.drone.calibration.calibrate_magnetometer()
 
     async def board_level(self):
-        async for progress_data in self.drone.calibration.calibrate_level_horizon():
-            print(progress_data)
+        self.drone.calibration.calibrate_level_horizon()

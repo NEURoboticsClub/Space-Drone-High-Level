@@ -8,7 +8,7 @@ class ConsoleFlightView(FlightView):
         super().__init__(drone_view)
 
     def get_calibrate(self):
-        result = input("Do you want to calibrate the drone? (y/n)")
+        result = input("Do you want to calibrate the drone? (y/n): ")
         return result.lower() == "y" 
 
     def get_flight_mode(self):
@@ -19,7 +19,7 @@ class ConsoleFlightView(FlightView):
         return int(result)
     
     def get_delay(self):
-        result = input("Please specity the duration of flight: ")
+        result = input("Please specify the duration of flight: ")
         return int(result)
     
     def try_connect(self):
@@ -42,3 +42,20 @@ class ConsoleFlightView(FlightView):
 
     def land(self):
         print("***Landing***")
+
+    def calibrate(self):
+        print("***Running Calibration Routine***")
+
+    def gyroscope_calibrated(self):
+        print("***Gyroscope calibrated successfully***")
+
+    def accelerometer_calibrated(self):
+        print("***Accelerometer calibrated successfully***")
+
+    def magnetometer_calibrated(self):
+        print("***Magnetometer calibrated successfully***")
+
+    def board_level_calibrated(self):
+        print("***Board horizon level calibrated successfully***")
+
+    
