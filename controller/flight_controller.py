@@ -33,10 +33,11 @@ class Controller:
         await self.model.check_position()
         self.view.valid_position()
 
+        await self.view.display_drone()
+
         calibrate = self.view.get_calibrate()
 
-        flight_mode = self.view.get_flight_mode()
-
+        
         if calibrate:
             # Run the calibration routine
 
@@ -54,12 +55,14 @@ class Controller:
             await(self.model.calibrator.board_level())
             self.view.board_level_calibrated()
 
+
+        
+        flight_mode = self.view.get_flight_mode()
+
         if flight_mode == FlightMode.takeoff_and_land:
             # Take off the drone and land it after the delay
 
             delay = self.view.get_delay()
-
-            await self.view.display_drone()
 
             self.view.arm()
             await self.model.vehicle.arm()
@@ -74,6 +77,10 @@ class Controller:
 
         if flight_mode == FlightMode.mission:
             # Conduct a mission of GPS Points
+
+            return_to_launch = self.view.return_to_launch()
+
+            await self.model.return_to_launch(return_to_launch)
 
             mission_points = self.view.get_mission(self.model)
 

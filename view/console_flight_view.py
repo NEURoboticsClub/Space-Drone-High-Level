@@ -60,11 +60,15 @@ class ConsoleFlightView(FlightView):
                            (latitude, longitude) or 0 to end :")
             if int(point[0]) == 0:
                 break
-            coordinates = [float(num) for num in point.split(",")]
+            coordinates = [float(num) for num in point.split(", ")]
             mission.append((coordinates[0], coordinates[1]))
 
         return mission
-
+    
+    def return_to_launch(self):
+        print("Do you want to return to the home position after mission is complete? (y/n): ", end = "")
+        return input().lower() == "y"
+    
     def try_connect(self):
         print("***Trying to connect...***")
 
