@@ -65,32 +65,54 @@ class ConsoleFlightView(FlightView):
 
         return mission
     
-    def return_to_launch(self):
+    def return_to_launch(self) -> bool:
+        """Ask the user if they want the drone to return
+        to home position after mission is complete.
+
+        Returns:
+            bool: True if return home
+        """
         print("Do you want to return to the home position after mission is complete? (y/n): ", end = "")
         return input().lower() == "y"
     
     def try_connect(self):
+        """Report a drone connection attempt to the console
+        """
         print("***Trying to connect...***")
 
     def connected(self):
+        """Report that the drone is connected to the console
+        """
         print("***Connected successfully!***")
 
     def check_position(self):
+        """Report drone position check to the console
+        """
         print("***Checking GPS Position***")
 
     def valid_position(self):
+        """Report valid drone position to the console
+        """
         print("***GPS Position Valid***")
 
     def arm(self):
+        """Report drone armed state to the console
+        """
         print("***Armed***")
 
     def takeoff(self):
+        """Report drone takeoff to the console
+        """
         print("***Taking off***")
 
     def land(self):
+        """Report drone landing to the console
+        """
         print("***Landing***")
 
     def calibrate(self):
+        """Report drone calibration to the console
+        """
         print("***Running Calibration Routine***")
 
     def gyroscope_calibrated(self):
