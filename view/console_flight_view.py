@@ -8,22 +8,33 @@ class ConsoleFlightView(FlightView):
     Allows user input to control the drone for a test flight
     """
 
-    def __init__(self, drone: Drone) -> None:
+    def __init__(self, drone: Drone, file_name: str) -> None:
         """Create a new console flight view
 
         Args:
             drone (Drone): drone object
         """
         drone_view = ConsoleDroneView(drone)
-        super().__init__(drone_view)
+        super().__init__(drone_view, file_name)
 
+    def write(self, message: str):
+        """Write a message to the log file and print it to the console
+
+        Args:
+            message (str): message
+        """
+        super().write(message)
+        print(message)
+    
     def get_calibrate(self) -> bool:
         """Ask the user if they want to calibrate the drone
 
         Returns:
             bool: True if the user wants to calibrate the drone
         """
-        result = input("Do you want to calibrate the drone? (y/n): ")
+        self.write("Do you want to calibrate the drone? (y/n): ")
+        result = input()
+        super().write(result)
         return result.lower() == "y"
 
     def get_flight_mode(self) -> int:
@@ -32,10 +43,12 @@ class ConsoleFlightView(FlightView):
         Returns:
             int: 1 for take off and land, 2 for mission
         """
-        print("Please select the flight mode from the following options: ")
-        print("1 - Takeoff and Land")
-        print("2 - Mission")
-        result = input("Enter your flight mode choice: ")
+        self.write("Please select the flight mode from the following options: ")
+        self.write("1 - Takeoff and Land")
+        self.write("2 - Mission")
+        self.write("Enter your flight mode choice: ")
+        result = input()
+        super().write(result)
         return int(result)
 
     def get_delay(self) -> int:
@@ -44,7 +57,9 @@ class ConsoleFlightView(FlightView):
         Returns:
             int: length of flight in seconds
         """
-        result = input("Please specify the duration of flight: ")
+        self.write("Please specify the duration of flight: ")
+        result = input()
+        super().write(result)
         return int(result)
 
     def get_mission(self) -> list:
@@ -53,11 +68,13 @@ class ConsoleFlightView(FlightView):
         Returns:
             list: list of GPS points as tuples (latitude, longitude)
         """
-        print("Please enter your mission points: ")
+        self.write("Please enter your mission points: ")
         mission = []
         while True:
-            point = input("Enter the next mission point \
+            self.write("Enter the next mission point \
                            (latitude, longitude) or 0 to end :")
+            point = input()
+            super().write(point)
             if int(point[0]) == 0:
                 break
             coordinates = [float(num) for num in point.split(", ")]
@@ -72,65 +89,68 @@ class ConsoleFlightView(FlightView):
         Returns:
             bool: True if return home
         """
-        print("Do you want to return to the home position after mission is complete? (y/n): ", end = "")
-        return input().lower() == "y"
+        self.write("Do you want to return to the home position after mission is complete? (y/n): ",
+                    end = "")
+        result = input().lower()
+        super().write(result)
+        return  result == "y"
     
     def try_connect(self):
         """Report a drone connection attempt to the console
         """
-        print("***Trying to connect...***")
+        self.write("***Trying to connect...***")
 
     def connected(self):
         """Report that the drone is connected to the console
         """
-        print("***Connected successfully!***")
+        self.write("***Connected successfully!***")
 
     def check_position(self):
         """Report drone position check to the console
         """
-        print("***Checking GPS Position***")
+        self.write("***Checking GPS Position***")
 
     def valid_position(self):
         """Report valid drone position to the console
         """
-        print("***GPS Position Valid***")
+        self.write("***GPS Position Valid***")
 
     def arm(self):
         """Report drone armed state to the console
         """
-        print("***Armed***")
+        self.write("***Armed***")
 
     def takeoff(self):
         """Report drone takeoff to the console
         """
-        print("***Taking off***")
+        self.write("***Taking off***")
 
     def land(self):
         """Report drone landing to the console
         """
-        print("***Landing***")
+        self.write("***Landing***")
 
     def calibrate(self):
         """Report drone calibration to the console
         """
-        print("***Running Calibration Routine***")
+        self.write("***Running Calibration Routine***")
 
     def gyroscope_calibrated(self):
         """Report gyroscope calibration
         """
-        print("***Gyroscope calibrated successfully***")
+        self.write("***Gyroscope calibrated successfully***")
 
     def accelerometer_calibrated(self):
         """Report accelerometer calibration
         """
-        print("***Accelerometer calibrated successfully***")
+        self.write("***Accelerometer calibrated successfully***")
 
     def magnetometer_calibrated(self):
         """Report magnetometer calibration
         """
-        print("***Magnetometer calibrated successfully***")
+        self.write("***Magnetometer calibrated successfully***")
 
     def board_level_calibrated(self):
         """Report board horizon calibration
         """
-        print("***Board horizon level calibrated successfully***")
+        self.write("***Board horizon level calibrated successfully***")

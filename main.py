@@ -5,7 +5,7 @@ from view.console_flight_view import ConsoleFlightView
 from controller.flight_controller import Controller
 
 model = FlightControl()
-view = ConsoleFlightView(model.vehicle)
+view = ConsoleFlightView(model.vehicle, "log.txt")
 controller = Controller(model, view)
 
 

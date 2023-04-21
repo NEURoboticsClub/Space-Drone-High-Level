@@ -9,13 +9,14 @@ class FlightView(ABC):
     Allows user control for a drone flight
     """
 
-    def __init__(self, drone_view: DroneView) -> None:
-        """Creates a new flight view
+    def __init__(self, drone_view: DroneView, file_name: str) -> None:
+        """Creates a new flight view and a log file for record keeping
 
         Args:
             drone_view (DroneView): drone view
         """
         self.drone_view = drone_view
+        self.file = open(file_name, mode = "w")
 
     @abstractmethod
     def get_flight_mode(self):
@@ -81,3 +82,12 @@ class FlightView(ABC):
         """Display the position of the drone to the user
         """
         await self.drone_view.display()
+
+    def write(self, message: str):
+        """Write a message to the log file
+
+        Args:
+            message (str): message
+        """
+        self.file.write(message + "\n")
+
