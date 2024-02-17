@@ -24,18 +24,19 @@ def calcArea(points):
 
 # determine the percentage of how much an inputted image takes up a frame
 def calcPercentage(area):
-    return (area / res) * 100
+    return float((area / res) * 100)
 
 async def print_position(drone):
     async for position in drone.telemetry.position():
         return position
 
 
+
 async def run():
 
     drone = System()
     await drone.connect(system_address="udp://:14540")
-
+    
     asyncio.ensure_future(print_position(drone))
 
     status_text_task = asyncio.ensure_future(print_status_text(drone))
@@ -58,6 +59,9 @@ async def run():
     print("-- Taking off")
     await drone.action.takeoff()
 
+    # Wait for the drone to takeoff (otherwise you can't give it any commands)
+    await asyncio.sleep(5)
+
     while cap.isOpened():
     # Read a frame from the video
         success, frame = cap.read()
@@ -78,8 +82,10 @@ async def run():
                 print(coordinates)  # print the Boxes object containing the detection bounding boxes
                 print("Area is", calcPercentage(calcArea(coordinates)), "%") # prints the area taken up as a percentage of camera resolution to determine 'distance'
                 position = await print_position(drone)
-                await drone.action.goto_location(position.latitude_deg, position.longitude_deg, calcPercentage(calcArea(coordinates)), 0)
-
+                await drone.action.goto_location(position.latitude_deg, position.longitude_deg, calcPercentage(calcArea(coordinates)) + 20.0, 0)
+                print("Goto command sent")
+                await asyncio.sleep(10)
+                
             # Break the loop if 'q' is pressed
             if cv2.waitKey(1) & 0xFF == ord("q"):
                 break
@@ -87,10 +93,13 @@ async def run():
             # Break the loop if the end of the video is reached
             break
 
+    
+        
+
     await asyncio.sleep(10)
 
     print("-- Landing")
-    await drone.action.land()
+    #await drone.action.land()
 
     status_text_task.cancel()
 
