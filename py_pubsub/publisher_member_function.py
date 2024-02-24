@@ -1,50 +1,87 @@
-# Copyright 2016 Open Source Robotics Foundation, Inc.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
+import cv2
 import rclpy
 from rclpy.node import Node
-
+from ultralytics import YOLO
 from std_msgs.msg import Float32
 
-class MinimalPublisher(Node):
+#Load the YOLOv8 model
+model = YOLO('yolov8n.pt')
 
-    def __init__(self):
-        super().__init__('minimal_publisher')
-        self.publisher_ = self.create_publisher(Float32, 'topic', 10)
+#determine the area of the bounding box returned by the input image
+def calcArea(points):
+    xDif = abs(points[0] - points[2])
+    yDif = abs(points[1] - points[3])
+    area = xDif*yDif
+    return area
+
+#determine the percentage of how much an inputted image takes up a frame
+def calcPercentage(area,res):
+    return (area / res) * 100
+
+class Publisher(Node):
+
+    def init(self):
+        super().init('Publisher')
+        self.publisher = self.create_publisher(Float32, 'area', 10)
         timer_period = 0.5  # seconds
-        self.timer = self.create_timer(timer_period, self.timer_callback)
-        self.i = 0
+        self.timer = self.create_timer(timer_period, self.publish_area)
+        
+    def publisharea(self):
 
-    def timer_callback(self):
-        msg = Float32()
-        msg.data = 3.0
-        self.publisher_.publish(msg)
-        self.get_logger().info('Publishing: "%s"' % msg.data)
-        self.i += 1
+        # Open the camera
+        cap = cv2.VideoCapture(0)
+        w = cap.get(cv2.CAPPROPFRAMEWIDTH)
+        h = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
+        res = w*h
+
+        # Loop through the video frames
+        while cap.isOpened():
+            # Read a frame from the video
+            success, frame = cap.read()
+
+            if success:
+                # Run YOLOv8 inference on the frame
+                results = model(frame)
+
+                # Visualize the results on the frame
+                annotated_frame = results[0].plot()
+
+                # Display the annotated frame
+                cv2.imshow("YOLOv8 Inference", annotated_frame)
+
+#View results
+                for r in results:
+                    coordinates = [int(coordinate) for coordinate in r.boxes.xyxy[0]]
+                    area = calcPercentage(calcArea(coordinates),res)
+                    msg = Float32()
+                    msg.data = area
+                    self.publisher.publish(msg)
+                    self.get_logger().info('Publishing area: "%s"' % msg.data)
+
+                # Break the loop if 'q' is pressed
+                if cv2.waitKey(1) & 0xFF == ord("q"):
+                    break
+            else:
+                # Break the loop if the end of the video is reached
+                break
+
+        # Release the video capture object and close the display window
+        cap.release()
+        cv2.destroyAllWindows()
 
 
 def main(args=None):
+
     rclpy.init(args=args)
 
-    minimal_publisher = MinimalPublisher()
+    pub = Publisher("publisher")
 
-    rclpy.spin(minimal_publisher)
+    rclpy.spin(pub)
 
     # Destroy the node explicitly
     # (optional - otherwise it will be done automatically
     # when the garbage collector destroys the node object)
-    minimal_publisher.destroy_node()
+    pub.destroy_node()
     rclpy.shutdown()
 
 
