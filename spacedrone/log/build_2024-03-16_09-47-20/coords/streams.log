@@ -1,0 +1,42 @@
+[0.093s] Invoking command in '/root/spacedrone/build/coords': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake /root/spacedrone/src/coords -DCMAKE_INSTALL_PREFIX=/root/spacedrone/install/coords
+[0.336s] -- The C compiler identification is GNU 11.4.0
+[2.855s] -- The CXX compiler identification is GNU 11.4.0
+[5.524s] -- Detecting C compiler ABI info
+[6.463s] -- Detecting C compiler ABI info - done
+[6.472s] -- Check for working C compiler: /usr/bin/cc - skipped
+[6.472s] -- Detecting C compile features
+[6.473s] -- Detecting C compile features - done
+[6.476s] -- Detecting CXX compiler ABI info
+[7.160s] -- Detecting CXX compiler ABI info - done
+[7.171s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[7.171s] -- Detecting CXX compile features
+[7.172s] -- Detecting CXX compile features - done
+[7.174s] -- Found ament_cmake: 1.3.7 (/opt/ros/humble/share/ament_cmake/cmake)
+[7.380s] -- Found Python3: /usr/bin/python3.10 (found version "3.10.12") found components: Interpreter 
+[7.493s] -- Found ament_lint_auto: 0.12.10 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[7.581s] -- Added test 'lint_cmake' to check CMake code style
+[7.582s] -- Added test 'xmllint' to check XML markup files
+[7.584s] -- Configuring done
+[7.587s] -- Generating done
+[7.588s] -- Build files have been written to: /root/spacedrone/build/coords
+[7.597s] Invoked command in '/root/spacedrone/build/coords' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake /root/spacedrone/src/coords -DCMAKE_INSTALL_PREFIX=/root/spacedrone/install/coords
+[7.598s] Invoking command in '/root/spacedrone/build/coords': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /root/spacedrone/build/coords -- -j12 -l12
+[7.636s] Invoked command in '/root/spacedrone/build/coords' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /root/spacedrone/build/coords -- -j12 -l12
+[7.668s] Invoking command in '/root/spacedrone/build/coords': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /root/spacedrone/build/coords
+[7.676s] -- Install configuration: ""
+[7.677s] -- Installing: /root/spacedrone/install/coords/share/ament_index/resource_index/package_run_dependencies/coords
+[7.678s] -- Installing: /root/spacedrone/install/coords/share/ament_index/resource_index/parent_prefix_path/coords
+[7.680s] -- Installing: /root/spacedrone/install/coords/share/coords/environment/ament_prefix_path.sh
+[7.680s] -- Installing: /root/spacedrone/install/coords/share/coords/environment/ament_prefix_path.dsv
+[7.680s] -- Installing: /root/spacedrone/install/coords/share/coords/environment/path.sh
+[7.680s] -- Installing: /root/spacedrone/install/coords/share/coords/environment/path.dsv
+[7.680s] -- Installing: /root/spacedrone/install/coords/share/coords/local_setup.bash
+[7.681s] -- Installing: /root/spacedrone/install/coords/share/coords/local_setup.sh
+[7.681s] -- Installing: /root/spacedrone/install/coords/share/coords/local_setup.zsh
+[7.681s] -- Installing: /root/spacedrone/install/coords/share/coords/local_setup.dsv
+[7.681s] -- Installing: /root/spacedrone/install/coords/share/coords/package.dsv
+[7.681s] -- Installing: /root/spacedrone/install/coords/share/ament_index/resource_index/packages/coords
+[7.681s] -- Installing: /root/spacedrone/install/coords/share/coords/cmake/coordsConfig.cmake
+[7.682s] -- Installing: /root/spacedrone/install/coords/share/coords/cmake/coordsConfig-version.cmake
+[7.682s] -- Installing: /root/spacedrone/install/coords/share/coords/package.xml
+[7.686s] Invoked command in '/root/spacedrone/build/coords' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /root/spacedrone/build/coords

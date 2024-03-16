@@ -1,0 +1,9 @@
+/root/spacedrone/build/coords/CMakeFiles/uninstall.dir
+/root/spacedrone/build/coords/CMakeFiles/coords_uninstall.dir
+/root/spacedrone/build/coords/CMakeFiles/test.dir
+/root/spacedrone/build/coords/CMakeFiles/edit_cache.dir
+/root/spacedrone/build/coords/CMakeFiles/rebuild_cache.dir
+/root/spacedrone/build/coords/CMakeFiles/list_install_components.dir
+/root/spacedrone/build/coords/CMakeFiles/install.dir
+/root/spacedrone/build/coords/CMakeFiles/install/local.dir
+/root/spacedrone/build/coords/CMakeFiles/install/strip.dir
