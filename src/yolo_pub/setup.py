@@ -20,7 +20,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-        'talker = yolo_pub.yolo_prediction2:main'
+        	'talker = yolo_pub.yolo_prediction2:main',
+        	'april = yolo_pub.apriltag_test:main'
         ],
     },
 )
