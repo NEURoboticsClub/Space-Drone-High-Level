@@ -1,0 +1,26 @@
+[3.016s] Invoking command in '/home/farhad/Documents/Robotics/Space-Drone/ros2_ws/src/py_pubsub': PYTHONPATH=/home/farhad/Documents/Robotics/Space-Drone/ros2_ws/src/py_pubsub/build/py_pubsub/prefix_override:/home/farhad/Documents/Robotics/Space-Drone/ros2_ws/src/py_pubsub/install/py_pubsub/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base build/py_pubsub build --build-base /home/farhad/Documents/Robotics/Space-Drone/ros2_ws/src/py_pubsub/build/py_pubsub/build install --record /home/farhad/Documents/Robotics/Space-Drone/ros2_ws/src/py_pubsub/build/py_pubsub/install.log --single-version-externally-managed
+[4.208s] running egg_info
+[4.210s] writing build/py_pubsub/py_pubsub.egg-info/PKG-INFO
+[4.210s] writing dependency_links to build/py_pubsub/py_pubsub.egg-info/dependency_links.txt
+[4.211s] writing entry points to build/py_pubsub/py_pubsub.egg-info/entry_points.txt
+[4.211s] writing requirements to build/py_pubsub/py_pubsub.egg-info/requires.txt
+[4.211s] writing top-level names to build/py_pubsub/py_pubsub.egg-info/top_level.txt
+[4.216s] reading manifest file 'build/py_pubsub/py_pubsub.egg-info/SOURCES.txt'
+[4.217s] adding license file 'LICENSE'
+[4.219s] writing manifest file 'build/py_pubsub/py_pubsub.egg-info/SOURCES.txt'
+[4.219s] running build
+[4.220s] running build_py
+[4.221s] copying py_pubsub/subscriber_member_function.py -> /home/farhad/Documents/Robotics/Space-Drone/ros2_ws/src/py_pubsub/build/py_pubsub/build/lib/py_pubsub
+[4.222s] running install
+[4.224s] running install_lib
+[4.225s] copying /home/farhad/Documents/Robotics/Space-Drone/ros2_ws/src/py_pubsub/build/py_pubsub/build/lib/py_pubsub/subscriber_member_function.py -> /home/farhad/Documents/Robotics/Space-Drone/ros2_ws/src/py_pubsub/install/py_pubsub/lib/python3.10/site-packages/py_pubsub
+[4.227s] byte-compiling /home/farhad/Documents/Robotics/Space-Drone/ros2_ws/src/py_pubsub/install/py_pubsub/lib/python3.10/site-packages/py_pubsub/subscriber_member_function.py to subscriber_member_function.cpython-310.pyc
+[4.228s] running install_data
+[4.230s] running install_egg_info
+[4.235s] removing '/home/farhad/Documents/Robotics/Space-Drone/ros2_ws/src/py_pubsub/install/py_pubsub/lib/python3.10/site-packages/py_pubsub-0.0.0-py3.10.egg-info' (and everything under it)
+[4.236s] Copying build/py_pubsub/py_pubsub.egg-info to /home/farhad/Documents/Robotics/Space-Drone/ros2_ws/src/py_pubsub/install/py_pubsub/lib/python3.10/site-packages/py_pubsub-0.0.0-py3.10.egg-info
+[4.239s] running install_scripts
+[4.298s] Installing listener script to /home/farhad/Documents/Robotics/Space-Drone/ros2_ws/src/py_pubsub/install/py_pubsub/lib/py_pubsub
+[4.299s] Installing talker script to /home/farhad/Documents/Robotics/Space-Drone/ros2_ws/src/py_pubsub/install/py_pubsub/lib/py_pubsub
+[4.300s] writing list of installed files to '/home/farhad/Documents/Robotics/Space-Drone/ros2_ws/src/py_pubsub/build/py_pubsub/install.log'
+[4.372s] Invoked command in '/home/farhad/Documents/Robotics/Space-Drone/ros2_ws/src/py_pubsub' returned '0': PYTHONPATH=/home/farhad/Documents/Robotics/Space-Drone/ros2_ws/src/py_pubsub/build/py_pubsub/prefix_override:/home/farhad/Documents/Robotics/Space-Drone/ros2_ws/src/py_pubsub/install/py_pubsub/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base build/py_pubsub build --build-base /home/farhad/Documents/Robotics/Space-Drone/ros2_ws/src/py_pubsub/build/py_pubsub/build install --record /home/farhad/Documents/Robotics/Space-Drone/ros2_ws/src/py_pubsub/build/py_pubsub/install.log --single-version-externally-managed
