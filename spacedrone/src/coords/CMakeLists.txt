@@ -13,7 +13,7 @@ find_package(ament_cmake REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
 
 rosidl_generate_interfaces(${PROJECT_NAME}
-  "msg/loc.msg"
+  "msg/Gps.msg" 
   # Add packages that above messages depend on, in this case geometry_msgs for Sphere.msg
 )
 if(BUILD_TESTING)
