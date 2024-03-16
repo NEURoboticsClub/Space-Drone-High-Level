@@ -3,6 +3,7 @@ import rclpy
 from rclpy.node import Node
 from ultralytics import YOLO
 from std_msgs.msg import Float32
+from coordinates.msg import Gps   
 
 # Load the YOLOv8 model
 model = YOLO('yolov8n.pt')
@@ -22,7 +23,7 @@ class Publisher(Node):
 
     def __init__(self):
         super().__init__('Publisher')
-        self.publisher = self.create_publisher(Float32, 'area', 10)
+        self.publisher = self.create_publisher(Gps, 'area', 10)
         timer_period = 0.5  # seconds
         self.timer = self.create_timer(timer_period, self.publish_area)
         
@@ -54,6 +55,7 @@ class Publisher(Node):
         #     self.publisher.publish(msg)
         #     self.get_logger().info('Publishing area: "%s"' % msg.data)
 
+        msg = Gps()
         ip = 0
         cap = cv2.VideoCapture(ip)
 
@@ -83,10 +85,14 @@ class Publisher(Node):
                     if r.boxes.xyxy != None:
                         coordinates = [int(coordinate) for coordinate in r.boxes.xyxy[0]]
                         area = calcPercentage(calcArea(coordinates),res)
-                        msg = Float32()
-                        msg.data = area
+                        
+                        msg.latitude = area
+                        msg.longitude = area
+                        msg.altitude = 10.0
                         self.publisher.publish(msg)
-                        self.get_logger().info('Publishing area: "%s"' % msg.data)
+                        self.get_logger().info('Publishing latitude: "%s"' % msg.latitude)
+                        self.get_logger().info('Publishing longitude: "%s"' % msg.longitude)
+                        self.get_logger().info('Publishing altitude: "%s"' % msg.altitude)
                     else:
                         print("Error: The list 'r.boxes.xyxy' is empty.")
 

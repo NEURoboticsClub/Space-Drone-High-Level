@@ -19,6 +19,7 @@ import asyncio
 from mavsdk import System
 
 from std_msgs.msg import Float32
+from coordinates.msg import Gps   
 
 
 class MinimalSubscriber(Node):
@@ -26,7 +27,7 @@ class MinimalSubscriber(Node):
     def __init__(self):
         super().__init__('minimal_subscriber')
         self.subscription = self.create_subscription(
-            Float32,
+            Gps,
             'area',
             self.listener_callback,
             10)
@@ -63,8 +64,10 @@ class MinimalSubscriber(Node):
         await self.drone.action.takeoff()
     
     async def listener_callback(self, msg):
-        gps = msg.data
-        await self.drone.action.goto_location(gps, gps, 10, 0)
+        latitude = msg.latitude
+        longitude = msg.longitude
+        altitude = msg.altitude
+        await self.drone.action.goto_location(latitude, longitude, altitude, 0)
 
 
 async def async_main(args=None):
