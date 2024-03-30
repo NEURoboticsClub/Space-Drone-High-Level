@@ -14,59 +14,46 @@ def calcArea(points):
     area = xDif*yDif
     return area
 
-# determine the percentage of how much an inputted image takes up a frame
+# determine the percentage of how much an input image takes up a frame
 def calcPercentage(area,res):
     return (area / res) * 100
+
+#calculates the center of the bounding box
+def centerOBB(points):
+    x = int((points[0] + points[2])/2)
+    y = int((points[1] + points[3])/2)
+    center = (x,y)
+
+    return center
 
 class Publisher(Node):
 
     def __init__(self):
         super().__init__('Publisher')
         self.publisher = self.create_publisher(Float32, 'area', 10)
-        timer_period = 0.5  # seconds
+        timer_period = 2  # seconds
         self.timer = self.create_timer(timer_period, self.publish_area)
         
 
     def publish_area(self):
 
-        # # Open the camera
-        # img = cv2.imread('/home/prem/Downloads/bus.jpg')
-
-        # if img is None:
-        #     print('Error: Unable to load image')
-
-        # # cv2.imshow("Image",img)
-        
-
-        
-        # h, w = img.shape[:2]
-        # res = w*h
-        # results = model(img)
-
-        # # Visualize the results on the frame
-        # annotated_frame = results[0].plot()
-
-        # for r in results:
-        #     coordinates = [int(coordinate) for coordinate in r.boxes.xyxy[0]]
-        #     area = calcPercentage(calcArea(coordinates),res)
-        #     msg = Float32()
-        #     msg.data = area
-        #     self.publisher.publish(msg)
-        #     self.get_logger().info('Publishing area: "%s"' % msg.data)
-
-        ip = "http://10.110.92.0:8080/video"
+        ip = "http://10.110.136.58:8080/video"
         cap = cv2.VideoCapture(ip)
+        cv2.namedWindow("Video",cv2.WINDOW_NORMAL)
+        cv2.resizeWindow("Video",600,600)
 
         w = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
         h = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
         res = w*h
-
-
+        frame_center = (int(w/2),int(h/2))
+        color = (0,255,255)
+        
 
         # Loop through the video frames
         while cap.isOpened():
             # Read a frame from the video
             success, frame = cap.read()
+            
 
             if success:
                 # Run YOLOv8 inference on the frame
@@ -74,14 +61,18 @@ class Publisher(Node):
 
                 # Visualize the results on the frame
                 annotated_frame = results[0].plot()
-
-                # Display the annotated frame
-                cv2.imshow("YOLOv8 Inference", annotated_frame)
                 
                 # View results
                 for r in results:
-                    if r.boxes.xyxy == None:
+                    if r.boxes.xyxy != None:
+
                         coordinates = [int(coordinate) for coordinate in r.boxes.xyxy[0]]
+                        box_center = centerOBB(coordinates)
+                        cv2.circle(annotated_frame,box_center,10,(0,0,255),cv2.FILLED)
+                        
+                        cv2.circle(annotated_frame,frame_center,10,color, cv2.FILLED)
+                        cv2.imshow("Video", annotated_frame)
+                        cv2.waitKey(2000)
                         area = calcPercentage(calcArea(coordinates),res)
                         msg = Float32()
                         msg.data = area
