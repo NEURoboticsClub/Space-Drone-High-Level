@@ -1,3 +1,8 @@
+'''
+Code used from https://github.com/niconielsen32/ComputerVision/tree/master/ArUco
+and also referred to his YT videos
+'''
+
 import numpy as np
 import time
 import cv2
