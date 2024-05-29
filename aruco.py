@@ -90,9 +90,9 @@ while cap.isOpened():
  
 	# corners, ids, rejected = cv2.aruco.detectMarkers(img, arucoDict, parameters=arucoParams)
 	corners, ids, rejected = detector.detectMarkers(img)
-	detected_markers = aruco_display(corners, ids, rejected, img)
+	display_markers = aruco_display(corners, ids, rejected, img)
 
-	cv2.imshow("Image", detected_markers)
+	cv2.imshow("Image", display_markers)
 
 	key = cv2.waitKey(1) & 0xFF
 	if key == ord("q"):
