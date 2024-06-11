@@ -65,7 +65,23 @@ def aruco_display(corners, ids, rejected, image):
 			
 	return image
 
+def pose_estimation(corners, marker_size, matrix_coefficients, distortion_coefficients):
+    
+    marker_points = np.array([[-marker_size / 2, marker_size / 2, 0],
+                              [marker_size / 2, marker_size / 2, 0],
+                              [marker_size / 2, -marker_size / 2, 0],
+                              [-marker_size / 2, -marker_size / 2, 0]], dtype=np.float32)
+    trash = []
+    rvecs = []
+    tvecs = []
 
+    for c in corners:
+            _, R, t = cv2.solvePnP(marker_points, c, matrix_coefficients, distortion_coefficients, False, cv2.SOLVEPNP_IPPE_SQUARE)
+            rvecs.append(R)
+            tvecs.append(t)
+            trash.append(_)
+
+    return rvecs, tvecs, trash
 
 
 aruco_type = "DICT_5X5_100"
@@ -82,6 +98,11 @@ cap = cv2.VideoCapture(ip)
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, 500)
 cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 500)
 
+calibration_matrix = np.array(((1484.001664055822, 0, 945.7762352668258),
+							   (0,1484.001664055822, 520.8557474898012),
+							   (0,0,1)))
+distortion_params = np.array((-0.0179606305852,0.180716809921,-0.00015874041681,-0.00190823724612,-0.333257089362))
+
 
 while cap.isOpened():
     
@@ -89,15 +110,19 @@ while cap.isOpened():
 
 	h, w, _ = img.shape
 
-	width = 1000
-	height = int(width*(h/w))
-	img = cv2.resize(img, (width, height), interpolation=cv2.INTER_CUBIC)
- 
-	# corners, ids, rejected = cv2.aruco.detectMarkers(img, arucoDict, parameters=arucoParams)
-	corners, ids, rejected = detector.detectMarkers(img)
-	display_markers = aruco_display(corners, ids, rejected, img)
+	img = cv2.resize(img, (500, 500), interpolation=cv2.INTER_CUBIC)
+	gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+	corners, ids, rejected = detector.detectMarkers(gray)
+	marker_size = 0.5
 
-	cv2.imshow("Image", display_markers)
+	if ids is not None:
+		rvecs, tvecs, _ = pose_estimation(corners, marker_size, calibration_matrix, distortion_params)
+		for i in range(len(ids)):
+			cv2.aruco.drawDetectedMarkers(img, corners)
+			cv2.drawFrameAxes(img, calibration_matrix, distortion_params, rvecs[i], tvecs[i], 0.1)
+			print(f"ID: {ids[i]}, Rvec: {rvecs[i]}, Tvec: {tvecs[i]}")
+    
+	cv2.imshow("Image", img)
 
 	key = cv2.waitKey(1) & 0xFF
 	if key == ord("q"):
