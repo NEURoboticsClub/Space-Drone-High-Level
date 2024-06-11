@@ -113,13 +113,13 @@ while cap.isOpened():
 	img = cv2.resize(img, (500, 500), interpolation=cv2.INTER_CUBIC)
 	gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 	corners, ids, rejected = detector.detectMarkers(gray)
-	marker_size = 0.5
+	marker_size = 100
 
 	if ids is not None:
 		rvecs, tvecs, _ = pose_estimation(corners, marker_size, calibration_matrix, distortion_params)
 		for i in range(len(ids)):
 			cv2.aruco.drawDetectedMarkers(img, corners)
-			cv2.drawFrameAxes(img, calibration_matrix, distortion_params, rvecs[i], tvecs[i], 0.1)
+			cv2.drawFrameAxes(img, calibration_matrix, distortion_params, rvecs[i], tvecs[i], 5)
 			print(f"ID: {ids[i]}, Rvec: {rvecs[i]}, Tvec: {tvecs[i]}")
     
 	cv2.imshow("Image", img)
