@@ -2,6 +2,7 @@ import numpy as np
 import cv2 as cv
 import glob
 import pickle
+import os
 
 
 
@@ -28,8 +29,9 @@ objp = objp * size_of_chessboard_squares_mm
 objpoints = [] # 3d point in real world space
 imgpoints = [] # 2d points in image plane.
 
+current_dir = os.path.dirname(os.path.abspath(__file__))
 
-images = glob.glob('/Users/starboy/Documents/workspace_python/calibration/images/*.png')
+images = glob.glob(os.path.join(current_dir, 'images/*.png'))
 
 for image in images:
 
@@ -62,16 +64,16 @@ cv.destroyAllWindows()
 ret, cameraMatrix, dist, rvecs, tvecs = cv.calibrateCamera(objpoints, imgpoints, frameSize, None, None)
 
 # Save the camera calibration result for later use (we won't worry about rvecs / tvecs)
-pickle.dump((cameraMatrix, dist), open( "calibration.pkl", "wb" ))
-pickle.dump(cameraMatrix, open( "cameraMatrix.pkl", "wb" ))
-pickle.dump(dist, open( "dist.pkl", "wb" ))
-pickle.dump(rvecs, open( "rotation.pkl","wb"))
-pickle.dump(tvecs, open( "translation.pkl","wb"))
+pickle.dump((cameraMatrix, dist), open(os.path.join(current_dir,"hp_laptop_webcam_cali/calibration.pkl"), "wb" ))
+pickle.dump(cameraMatrix, open(os.path.join(current_dir,"hp_laptop_webcam_cali/cameraMatrix.pkl"), "wb" ))
+pickle.dump(dist, open(os.path.join(current_dir,"hp_laptop_webcam_cali/dist.pkl"), "wb" ))
+pickle.dump(rvecs, open(os.path.join(current_dir,"hp_laptop_webcam_cali/rotation.pkl"),"wb"))
+pickle.dump(tvecs, open(os.path.join(current_dir,"hp_laptop_webcam_cali/translation.pkl"),"wb"))
 
 
 ############## UNDISTORTION #####################################################
 
-img = cv.imread('/Users/starboy/Documents/workspace_python/calibration/images/img7.png')
+img = cv.imread(os.path.join(current_dir, 'images/img7.png'))
 h,  w = img.shape[:2]
 newCameraMatrix, roi = cv.getOptimalNewCameraMatrix(cameraMatrix, dist, (w,h), 1, (w,h))
 
@@ -83,7 +85,7 @@ dst = cv.undistort(img, cameraMatrix, dist, None, newCameraMatrix)
 # crop the image
 x, y, w, h = roi
 dst = dst[y:y+h, x:x+w]
-cv.imwrite('/Users/starboy/Documents/workspace_python/calibration/images/caliResult1.png', dst)
+cv.imwrite(os.path.join(current_dir,'images/caliResult1.png'), dst)
 
 
 
@@ -94,7 +96,7 @@ dst = cv.remap(img, mapx, mapy, cv.INTER_LINEAR)
 # crop the image
 x, y, w, h = roi
 dst = dst[y:y+h, x:x+w]
-cv.imwrite('/Users/starboy/Documents/workspace_python/calibration/images/caliResult2.png', dst)
+cv.imwrite(os.path.join(current_dir,'images/caliResult2.png'), dst)
 
 
 
