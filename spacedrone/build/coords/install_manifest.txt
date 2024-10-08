@@ -1,0 +1,15 @@
+/root/spacedrone/install/coords/share/ament_index/resource_index/package_run_dependencies/coords
+/root/spacedrone/install/coords/share/ament_index/resource_index/parent_prefix_path/coords
+/root/spacedrone/install/coords/share/coords/environment/ament_prefix_path.sh
+/root/spacedrone/install/coords/share/coords/environment/ament_prefix_path.dsv
+/root/spacedrone/install/coords/share/coords/environment/path.sh
+/root/spacedrone/install/coords/share/coords/environment/path.dsv
+/root/spacedrone/install/coords/share/coords/local_setup.bash
+/root/spacedrone/install/coords/share/coords/local_setup.sh
+/root/spacedrone/install/coords/share/coords/local_setup.zsh
+/root/spacedrone/install/coords/share/coords/local_setup.dsv
+/root/spacedrone/install/coords/share/coords/package.dsv
+/root/spacedrone/install/coords/share/ament_index/resource_index/packages/coords
+/root/spacedrone/install/coords/share/coords/cmake/coordsConfig.cmake
+/root/spacedrone/install/coords/share/coords/cmake/coordsConfig-version.cmake
+/root/spacedrone/install/coords/share/coords/package.xml

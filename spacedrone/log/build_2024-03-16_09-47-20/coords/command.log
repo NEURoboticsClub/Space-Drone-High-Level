@@ -1,0 +1,6 @@
+Invoking command in '/root/spacedrone/build/coords': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake /root/spacedrone/src/coords -DCMAKE_INSTALL_PREFIX=/root/spacedrone/install/coords
+Invoked command in '/root/spacedrone/build/coords' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake /root/spacedrone/src/coords -DCMAKE_INSTALL_PREFIX=/root/spacedrone/install/coords
+Invoking command in '/root/spacedrone/build/coords': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /root/spacedrone/build/coords -- -j12 -l12
+Invoked command in '/root/spacedrone/build/coords' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /root/spacedrone/build/coords -- -j12 -l12
+Invoking command in '/root/spacedrone/build/coords': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /root/spacedrone/build/coords
+Invoked command in '/root/spacedrone/build/coords' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /root/spacedrone/build/coords
