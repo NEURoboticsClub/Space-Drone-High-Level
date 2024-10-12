@@ -1,0 +1,4 @@
+# Ignore build, install, log from building packages
+/build/
+/install/
+/log/
