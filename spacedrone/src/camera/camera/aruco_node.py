@@ -3,6 +3,7 @@ import numpy as np
 import cv2.version
 import cv2
 from rclpy.node import Node
+from scipy.spatial.transform import Rotation
 
 # TODO: figure out if pose has a x,y,z and rotation compoents
 # Is it more convenient to use quaternions thorughout the project??? This is usually the case
@@ -15,19 +16,34 @@ class ArucoPublisher(Node):
 
         # Initilaizing x,y,z variables from tvec from aruco
         #   tvec = translation vector
-        #   yaw is the z rotation from rvec (rotation vector)
+        #   yaw is the z rotation obtained from rvec (rotation vector)
         #   (ignoring other rotations for now, may need others later)
         self.x = None
         self.y = None
         self.z = None
-        self.yaw = None
+        self.yaw = None # TODO: this is not set in the code, remove or set it, currently using quaternions (Aaron comment)
         self.publisher_ = self.create_publisher(
             Pose, 
             'pose', 
             10)
         
-        # TODO: Figure if the timer below is necessary or if we need it
-        # Aaron comment: pretty sure this is just frequency of publishing
+        self.detect_func = ArucoDetection()
+
+        #define the markers to be detected
+        aruco_type = "DICT_5X5_100"
+
+        self.arucoDict = cv2.aruco.getPredefinedDictionary(ARUCO_DICT[aruco_type])
+        self.arucoParams = cv2.aruco.DetectorParameters()
+        self.detector = cv2.aruco.ArucoDetector(self.arucoDict, self.arucoParams)
+
+        #capture images from the camera
+        ip = "http://192.168.1.119:8080/video"		#external camera, use 0 for default camera on the computer
+        self.cap = cv2.VideoCapture(ip)
+
+        self.cap.set(cv2.CAP_PROP_FRAME_WIDTH, 500)
+        self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 500)
+        
+        # TODO: Figure if the timer below is necessary or if we need it (Aaron comment)
 
         # timer_period = 0.5  # seconds
         # self.timer = self.create_timer(timer_period, self.timer_callback)
@@ -43,57 +59,58 @@ class ArucoPublisher(Node):
     #     self.i += 1
 
     def publish_aruco_coords(self):
-        # TODO: publish the proper variables here
+        ret, img = self.cap.read()
+        h, w, _ = img.shape
 
+        img = cv2.resize(img, (500, 500), interpolation=cv2.INTER_CUBIC)
+        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)	#convert the image to grayscale for detection
+        corners, ids, rejected = self.detector.detectMarkers(gray)	#detect
+        marker_size = 100	#define marker size in proper units (subject to change)
 
-        detector = ArucoDetection()
-
-        #define the markers to be detected
-        aruco_type = "DICT_5X5_100"
-
-        arucoDict = cv2.aruco.getPredefinedDictionary(ARUCO_DICT[aruco_type])
-        arucoParams = cv2.aruco.DetectorParameters()
-        detector = cv2.aruco.ArucoDetector(arucoDict, arucoParams)
-
-        #capture images from the camera
-        ip = "http://192.168.1.119:8080/video"		#external camera, use 0 for default camera on the computer
-        cap = cv2.VideoCapture(ip)
-
-        cap.set(cv2.CAP_PROP_FRAME_WIDTH, 500)
-        cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 500)
-
-
-        while cap.isOpened():
+        if ids is not None:
+            #obtain rotational and translation vectors wrt tags
+            rvecs, tvecs, _ = self.detect_func.pose_estimation(corners, marker_size, self.detector.calibration_matrix, self.detector.distortion_params)
             
-            ret, img = cap.read()
-            h, w, _ = img.shape
-
-            img = cv2.resize(img, (500, 500), interpolation=cv2.INTER_CUBIC)
-            gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)	#convert the image to grayscale for detection
-            corners, ids, rejected = detector.detectMarkers(gray)	#detect
-            marker_size = 100	#define marker size in proper units (subject to change)
-
-            if ids is not None:
-                #obtain rotational and translation vectors wrt tags
-                rvecs, tvecs, _ = detector.pose_estimation(corners, marker_size, detector.calibration_matrix, detector.distortion_params)
-                
-                #draw axes, box and print information of each tag in the frame
-                for i in range(len(ids)):
-                    cv2.aruco.drawDetectedMarkers(img, corners)
-                    cv2.drawFrameAxes(img, detector.calibration_matrix, detector.distortion_params, rvecs[i], tvecs[i], 5)
-                    print(f"ID: {ids[i]}, Rvec: {rvecs[i]}, Tvec: {tvecs[i]}")
+            #draw axes, box and print information of each tag in the frame
+            for i in range(len(ids)):
+                cv2.aruco.drawDetectedMarkers(img, corners)
+                cv2.drawFrameAxes(img, self.detector.calibration_matrix, self.detector.distortion_params, rvecs[i], tvecs[i], 5)
+                print(f"ID: {ids[i]}, Rvec: {rvecs[i]}, Tvec: {tvecs[i]}")
             
             cv2.imshow("Image", img)
 
-            # TODO: can probably delete this
-            #press q to quit
-            key = cv2.waitKey(1) & 0xFF
-            if key == ord("q"):
-                break
+            # setting x, y, and z variables
+            self.x, self.y, self.z = tvecs[0,0]
+            # setting message to x, y, and z
+            msg = Pose()
+            msg.position.x = self.x
+            msg.position.y = self.y
+            msg.position.z = self.z
+
+            # euler angles stuff:
+            # convert the rotation vector to a rotation matrix
+            R, _ = cv2.Rodrigues(rvecs[0, 0])  # access the 1D array
+
+            # extract yaw, pitch, and roll from the rotation matrix
+            yaw = np.arctan2(R[1, 0], R[0, 0])   # Yaw (around Z-axis)
+            pitch = np.arcsin(-R[2, 0])          # Pitch (around Y-axis)
+            roll = np.arctan2(R[2, 1], R[2, 2])  # Roll (around X-axis)
+
+            rot = Rotation.from_euler('zyx',[yaw,pitch,roll])
+            rot.as_quat()
+
+            msg.orientation.x, msg.orientation.y,\
+                 msg.orientation.z, msg.orientation.w = rot
+
+            self.publisher.publish(msg)
+            # # Commented out next 4 lines of code below
+            # #press q to quit
+            # key = cv2.waitKey(1) & 0xFF
+            # if key == ord("q"):
+            #     break
         
-        # TODO: Do i need to delete this? not sure if ROS2 already distroys windows when nodes are shut down or not
-        cv2.destroyAllWindows()
-        
+        # TODO: Do i need to delete this? not sure if ROS2 already distroys windows when nodes are shut down or not (Aaron comment)
+        # cv2.destroyAllWindows()
 
 #dictionary for tags
 ARUCO_DICT = {
@@ -124,6 +141,7 @@ ARUCO_DICT = {
 class ArucoDetection:
     def __init_(self):
         # calibration values for the camera
+        # TODO: replace "calibratoin_matrix" and "distortion_params" with actual values for the camera we will be using (Aaron comment)
         self.calibration_matrix = np.array(((1484.001664055822, 0, 945.7762352668258),
 							   (0,1484.001664055822, 520.8557474898012),
 							   (0,0,1)))
