@@ -1,0 +1,3 @@
+[console_scripts]
+aruco_node = camera.aruco_node:main
+

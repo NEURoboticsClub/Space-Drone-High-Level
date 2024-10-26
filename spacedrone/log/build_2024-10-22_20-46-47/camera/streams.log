@@ -1,0 +1,40 @@
+[2.530s] Invoking command in '/home/aaron/Space-Drone-High-Level/spacedrone/src/camera': PYTHONPATH=/home/aaron/Space-Drone-High-Level/spacedrone/build/camera/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/aaron/Space-Drone-High-Level/spacedrone/install/camera/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/camera build --build-base /home/aaron/Space-Drone-High-Level/spacedrone/build/camera/build install --record /home/aaron/Space-Drone-High-Level/spacedrone/build/camera/install.log --single-version-externally-managed install_data
+[3.709s] running egg_info
+[3.711s] creating ../../build/camera/camera.egg-info
+[3.711s] writing ../../build/camera/camera.egg-info/PKG-INFO
+[3.713s] writing dependency_links to ../../build/camera/camera.egg-info/dependency_links.txt
+[3.714s] writing entry points to ../../build/camera/camera.egg-info/entry_points.txt
+[3.714s] writing requirements to ../../build/camera/camera.egg-info/requires.txt
+[3.715s] writing top-level names to ../../build/camera/camera.egg-info/top_level.txt
+[3.721s] writing manifest file '../../build/camera/camera.egg-info/SOURCES.txt'
+[3.728s] reading manifest file '../../build/camera/camera.egg-info/SOURCES.txt'
+[3.729s] adding license file 'LICENSE'
+[3.731s] writing manifest file '../../build/camera/camera.egg-info/SOURCES.txt'
+[3.732s] running build
+[3.733s] running build_py
+[3.734s] creating /home/aaron/Space-Drone-High-Level/spacedrone/build/camera/build
+[3.734s] creating /home/aaron/Space-Drone-High-Level/spacedrone/build/camera/build/lib
+[3.734s] creating /home/aaron/Space-Drone-High-Level/spacedrone/build/camera/build/lib/camera
+[3.735s] copying camera/__init__.py -> /home/aaron/Space-Drone-High-Level/spacedrone/build/camera/build/lib/camera
+[3.735s] copying camera/aruco_node.py -> /home/aaron/Space-Drone-High-Level/spacedrone/build/camera/build/lib/camera
+[3.735s] running install
+[3.736s] running install_lib
+[3.739s] creating /home/aaron/Space-Drone-High-Level/spacedrone/install/camera/lib/python3.10/site-packages/camera
+[3.740s] copying /home/aaron/Space-Drone-High-Level/spacedrone/build/camera/build/lib/camera/__init__.py -> /home/aaron/Space-Drone-High-Level/spacedrone/install/camera/lib/python3.10/site-packages/camera
+[3.740s] copying /home/aaron/Space-Drone-High-Level/spacedrone/build/camera/build/lib/camera/aruco_node.py -> /home/aaron/Space-Drone-High-Level/spacedrone/install/camera/lib/python3.10/site-packages/camera
+[3.742s] byte-compiling /home/aaron/Space-Drone-High-Level/spacedrone/install/camera/lib/python3.10/site-packages/camera/__init__.py to __init__.cpython-310.pyc
+[3.743s] byte-compiling /home/aaron/Space-Drone-High-Level/spacedrone/install/camera/lib/python3.10/site-packages/camera/aruco_node.py to aruco_node.cpython-310.pyc
+[3.750s] running install_data
+[3.751s] creating /home/aaron/Space-Drone-High-Level/spacedrone/install/camera/share
+[3.752s] creating /home/aaron/Space-Drone-High-Level/spacedrone/install/camera/share/ament_index
+[3.752s] creating /home/aaron/Space-Drone-High-Level/spacedrone/install/camera/share/ament_index/resource_index
+[3.752s] creating /home/aaron/Space-Drone-High-Level/spacedrone/install/camera/share/ament_index/resource_index/packages
+[3.753s] copying resource/camera -> /home/aaron/Space-Drone-High-Level/spacedrone/install/camera/share/ament_index/resource_index/packages
+[3.753s] creating /home/aaron/Space-Drone-High-Level/spacedrone/install/camera/share/camera
+[3.754s] copying package.xml -> /home/aaron/Space-Drone-High-Level/spacedrone/install/camera/share/camera
+[3.754s] running install_egg_info
+[3.763s] Copying ../../build/camera/camera.egg-info to /home/aaron/Space-Drone-High-Level/spacedrone/install/camera/lib/python3.10/site-packages/camera-0.0.0-py3.10.egg-info
+[3.767s] running install_scripts
+[3.855s] Installing aruco_node script to /home/aaron/Space-Drone-High-Level/spacedrone/install/camera/lib/camera
+[3.856s] writing list of installed files to '/home/aaron/Space-Drone-High-Level/spacedrone/build/camera/install.log'
+[3.943s] Invoked command in '/home/aaron/Space-Drone-High-Level/spacedrone/src/camera' returned '0': PYTHONPATH=/home/aaron/Space-Drone-High-Level/spacedrone/build/camera/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/aaron/Space-Drone-High-Level/spacedrone/install/camera/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/camera build --build-base /home/aaron/Space-Drone-High-Level/spacedrone/build/camera/build install --record /home/aaron/Space-Drone-High-Level/spacedrone/build/camera/install.log --single-version-externally-managed install_data

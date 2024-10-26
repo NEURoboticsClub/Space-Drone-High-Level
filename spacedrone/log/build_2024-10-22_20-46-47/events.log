@@ -1,0 +1,84 @@
+[0.000000] (-) TimerEvent: {}
+[0.001647] (camera) JobQueued: {'identifier': 'camera', 'dependencies': OrderedDict()}
+[0.001948] (camera) JobStarted: {'identifier': 'camera'}
+[0.099224] (-) TimerEvent: {}
+[0.199846] (-) TimerEvent: {}
+[0.300427] (-) TimerEvent: {}
+[0.401042] (-) TimerEvent: {}
+[0.501687] (-) TimerEvent: {}
+[0.602366] (-) TimerEvent: {}
+[0.703058] (-) TimerEvent: {}
+[0.803680] (-) TimerEvent: {}
+[0.904274] (-) TimerEvent: {}
+[1.004881] (-) TimerEvent: {}
+[1.105471] (-) TimerEvent: {}
+[1.206091] (-) TimerEvent: {}
+[1.306749] (-) TimerEvent: {}
+[1.407355] (-) TimerEvent: {}
+[1.507957] (-) TimerEvent: {}
+[1.608599] (-) TimerEvent: {}
+[1.709213] (-) TimerEvent: {}
+[1.809904] (-) TimerEvent: {}
+[1.910542] (-) TimerEvent: {}
+[2.011150] (-) TimerEvent: {}
+[2.111796] (-) TimerEvent: {}
+[2.212407] (-) TimerEvent: {}
+[2.313012] (-) TimerEvent: {}
+[2.413681] (-) TimerEvent: {}
+[2.514469] (-) TimerEvent: {}
+[2.527341] (camera) Command: {'cmd': ['/usr/bin/python3', '-W', 'ignore:setup.py install is deprecated', 'setup.py', 'egg_info', '--egg-base', '../../build/camera', 'build', '--build-base', '/home/aaron/Space-Drone-High-Level/spacedrone/build/camera/build', 'install', '--record', '/home/aaron/Space-Drone-High-Level/spacedrone/build/camera/install.log', '--single-version-externally-managed', 'install_data'], 'cwd': '/home/aaron/Space-Drone-High-Level/spacedrone/src/camera', 'env': {'LESSOPEN': '| /usr/bin/lesspipe %s', 'USER': 'aaron', 'XDG_SESSION_TYPE': 'wayland', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/home/aaron/Space-Drone-High-Level/install/coords/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib', 'HOME': '/home/aaron', 'OLDPWD': '/home/aaron/Space-Drone-High-Level', 'DESKTOP_SESSION': 'ubuntu', 'ROS_PYTHON_VERSION': '3', 'GNOME_SHELL_SESSION_MODE': 'ubuntu', 'HOMEBREW_PREFIX': '/home/linuxbrew/.linuxbrew', 'GTK_MODULES': 'gail:atk-bridge', 'SYSTEMD_EXEC_PID': '1455', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'COLORTERM': 'truecolor', 'IM_CONFIG_PHASE': '1', 'WAYLAND_DISPLAY': 'wayland-0', 'COLCON_PREFIX_PATH': '/home/aaron/Space-Drone-High-Level/install', 'INFOPATH': '/home/linuxbrew/.linuxbrew/share/info:', 'ROS_DISTRO': 'humble', 'LOGNAME': 'aaron', '_': '/home/aaron/.local/bin/colcon', 'ROS_VERSION': '2', 'XDG_SESSION_CLASS': 'user', 'USERNAME': 'aaron', 'TERM': 'xterm-256color', 'GNOME_DESKTOP_SESSION_ID': 'this-is-deprecated', 'ROS_LOCALHOST_ONLY': '0', 'PATH': '/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/opt/ros/humble/bin:/home/aaron/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin', 'SESSION_MANAGER': 'local/aaron-ThinkPad-X1-Yoga-3rd:@/tmp/.ICE-unix/1408,unix/aaron-ThinkPad-X1-Yoga-3rd:/tmp/.ICE-unix/1408', 'HOMEBREW_CELLAR': '/home/linuxbrew/.linuxbrew/Cellar', 'XDG_MENU_PREFIX': 'gnome-', 'GNOME_TERMINAL_SCREEN': '/org/gnome/Terminal/screen/56743c83_cdc5_4597_b075_7a2571ee905c', 'GNOME_SETUP_DISPLAY': ':1', 'XDG_RUNTIME_DIR': '/run/user/1000', 'DISPLAY': ':0', 'LANG': 'en_US.UTF-8', 'XDG_CURRENT_DESKTOP': 'ubuntu:GNOME', 'XMODIFIERS': '@im=ibus', 'XDG_SESSION_DESKTOP': 'ubuntu', 'XAUTHORITY': '/run/user/1000/.mutter-Xwaylandauth.LCK5V2', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:', 'GNOME_TERMINAL_SERVICE': ':1.166', 'SSH_AGENT_LAUNCHER': 'gnome-keyring', 'SSH_AUTH_SOCK': '/run/user/1000/keyring/ssh', 'AMENT_PREFIX_PATH': '/home/aaron/Space-Drone-High-Level/install/yolo_pub:/home/aaron/Space-Drone-High-Level/install/coords:/opt/ros/humble', 'SHELL': '/bin/bash', 'QT_ACCESSIBILITY': '1', 'GDMSESSION': 'ubuntu', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'QT_IM_MODULE': 'ibus', 'PWD': '/home/aaron/Space-Drone-High-Level/spacedrone/build/camera', 'LC_ALL': 'en_US.UTF-8', 'XDG_CONFIG_DIRS': '/etc/xdg/xdg-ubuntu:/etc/xdg', 'XDG_DATA_DIRS': '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop', 'PYTHONPATH': '/home/aaron/Space-Drone-High-Level/spacedrone/build/camera/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/aaron/Space-Drone-High-Level/spacedrone/install/camera/lib/python3.10/site-packages:/home/aaron/Space-Drone-High-Level/install/yolo_pub/lib/python3.10/site-packages:/home/aaron/Space-Drone-High-Level/install/coords/local/lib/python3.10/dist-packages:/home/aaron/Space-Drone-High-Level/install/camera/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages', 'HOMEBREW_REPOSITORY': '/home/linuxbrew/.linuxbrew/Homebrew', 'COLCON': '1', 'VTE_VERSION': '6800', 'CMAKE_PREFIX_PATH': '/home/aaron/Space-Drone-High-Level/install/coords'}, 'shell': False}
+[2.614682] (-) TimerEvent: {}
+[2.715358] (-) TimerEvent: {}
+[2.816000] (-) TimerEvent: {}
+[2.916689] (-) TimerEvent: {}
+[3.017369] (-) TimerEvent: {}
+[3.118047] (-) TimerEvent: {}
+[3.218764] (-) TimerEvent: {}
+[3.319431] (-) TimerEvent: {}
+[3.420129] (-) TimerEvent: {}
+[3.520863] (-) TimerEvent: {}
+[3.621544] (-) TimerEvent: {}
+[3.710280] (camera) StdoutLine: {'line': b'running egg_info\n'}
+[3.712539] (camera) StdoutLine: {'line': b'creating ../../build/camera/camera.egg-info\n'}
+[3.713192] (camera) StdoutLine: {'line': b'writing ../../build/camera/camera.egg-info/PKG-INFO\n'}
+[3.714461] (camera) StdoutLine: {'line': b'writing dependency_links to ../../build/camera/camera.egg-info/dependency_links.txt\n'}
+[3.715201] (camera) StdoutLine: {'line': b'writing entry points to ../../build/camera/camera.egg-info/entry_points.txt\n'}
+[3.715981] (camera) StdoutLine: {'line': b'writing requirements to ../../build/camera/camera.egg-info/requires.txt\n'}
+[3.716506] (camera) StdoutLine: {'line': b'writing top-level names to ../../build/camera/camera.egg-info/top_level.txt\n'}
+[3.721714] (-) TimerEvent: {}
+[3.722484] (camera) StdoutLine: {'line': b"writing manifest file '../../build/camera/camera.egg-info/SOURCES.txt'\n"}
+[3.729725] (camera) StdoutLine: {'line': b"reading manifest file '../../build/camera/camera.egg-info/SOURCES.txt'\n"}
+[3.730488] (camera) StdoutLine: {'line': b"adding license file 'LICENSE'\n"}
+[3.733003] (camera) StdoutLine: {'line': b"writing manifest file '../../build/camera/camera.egg-info/SOURCES.txt'\n"}
+[3.733794] (camera) StdoutLine: {'line': b'running build\n'}
+[3.734777] (camera) StdoutLine: {'line': b'running build_py\n'}
+[3.735270] (camera) StdoutLine: {'line': b'creating /home/aaron/Space-Drone-High-Level/spacedrone/build/camera/build\n'}
+[3.735633] (camera) StdoutLine: {'line': b'creating /home/aaron/Space-Drone-High-Level/spacedrone/build/camera/build/lib\n'}
+[3.736111] (camera) StdoutLine: {'line': b'creating /home/aaron/Space-Drone-High-Level/spacedrone/build/camera/build/lib/camera\n'}
+[3.736579] (camera) StdoutLine: {'line': b'copying camera/__init__.py -> /home/aaron/Space-Drone-High-Level/spacedrone/build/camera/build/lib/camera\n'}
+[3.736870] (camera) StdoutLine: {'line': b'copying camera/aruco_node.py -> /home/aaron/Space-Drone-High-Level/spacedrone/build/camera/build/lib/camera\n'}
+[3.737139] (camera) StdoutLine: {'line': b'running install\n'}
+[3.737735] (camera) StdoutLine: {'line': b'running install_lib\n'}
+[3.740684] (camera) StdoutLine: {'line': b'creating /home/aaron/Space-Drone-High-Level/spacedrone/install/camera/lib/python3.10/site-packages/camera\n'}
+[3.741457] (camera) StdoutLine: {'line': b'copying /home/aaron/Space-Drone-High-Level/spacedrone/build/camera/build/lib/camera/__init__.py -> /home/aaron/Space-Drone-High-Level/spacedrone/install/camera/lib/python3.10/site-packages/camera\n'}
+[3.741927] (camera) StdoutLine: {'line': b'copying /home/aaron/Space-Drone-High-Level/spacedrone/build/camera/build/lib/camera/aruco_node.py -> /home/aaron/Space-Drone-High-Level/spacedrone/install/camera/lib/python3.10/site-packages/camera\n'}
+[3.743806] (camera) StdoutLine: {'line': b'byte-compiling /home/aaron/Space-Drone-High-Level/spacedrone/install/camera/lib/python3.10/site-packages/camera/__init__.py to __init__.cpython-310.pyc\n'}
+[3.744786] (camera) StdoutLine: {'line': b'byte-compiling /home/aaron/Space-Drone-High-Level/spacedrone/install/camera/lib/python3.10/site-packages/camera/aruco_node.py to aruco_node.cpython-310.pyc\n'}
+[3.751331] (camera) StdoutLine: {'line': b'running install_data\n'}
+[3.752333] (camera) StdoutLine: {'line': b'creating /home/aaron/Space-Drone-High-Level/spacedrone/install/camera/share\n'}
+[3.753076] (camera) StdoutLine: {'line': b'creating /home/aaron/Space-Drone-High-Level/spacedrone/install/camera/share/ament_index\n'}
+[3.753637] (camera) StdoutLine: {'line': b'creating /home/aaron/Space-Drone-High-Level/spacedrone/install/camera/share/ament_index/resource_index\n'}
+[3.753983] (camera) StdoutLine: {'line': b'creating /home/aaron/Space-Drone-High-Level/spacedrone/install/camera/share/ament_index/resource_index/packages\n'}
+[3.754677] (camera) StdoutLine: {'line': b'copying resource/camera -> /home/aaron/Space-Drone-High-Level/spacedrone/install/camera/share/ament_index/resource_index/packages\n'}
+[3.755051] (camera) StdoutLine: {'line': b'creating /home/aaron/Space-Drone-High-Level/spacedrone/install/camera/share/camera\n'}
+[3.755374] (camera) StdoutLine: {'line': b'copying package.xml -> /home/aaron/Space-Drone-High-Level/spacedrone/install/camera/share/camera\n'}
+[3.755672] (camera) StdoutLine: {'line': b'running install_egg_info\n'}
+[3.764593] (camera) StdoutLine: {'line': b'Copying ../../build/camera/camera.egg-info to /home/aaron/Space-Drone-High-Level/spacedrone/install/camera/lib/python3.10/site-packages/camera-0.0.0-py3.10.egg-info\n'}
+[3.768556] (camera) StdoutLine: {'line': b'running install_scripts\n'}
+[3.821961] (-) TimerEvent: {}
+[3.856338] (camera) StdoutLine: {'line': b'Installing aruco_node script to /home/aaron/Space-Drone-High-Level/spacedrone/install/camera/lib/camera\n'}
+[3.857820] (camera) StdoutLine: {'line': b"writing list of installed files to '/home/aaron/Space-Drone-High-Level/spacedrone/build/camera/install.log'\n"}
+[3.922217] (-) TimerEvent: {}
+[3.943778] (camera) CommandEnded: {'returncode': 0}
+[3.997945] (camera) JobEnded: {'identifier': 'camera', 'rc': 0}
+[4.000436] (-) EventReactorShutdown: {}

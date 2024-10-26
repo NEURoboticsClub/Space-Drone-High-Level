@@ -5,7 +5,8 @@ import cv2
 from rclpy.node import Node
 from scipy.spatial.transform import Rotation
 
-# TODO: Is it more convenient to use quaternions thorughout the project? Quaternions are built into ROS (also avoids gimble lock)
+# TODO: figure out if pose has a x,y,z and rotation compoents
+# Is it more convenient to use quaternions thorughout the project??? This is usually the case
 from geometry_msgs.msg import Pose
 
 class ArucoPublisher(Node):
@@ -17,7 +18,7 @@ class ArucoPublisher(Node):
         #   tvec = translation vector
         #   yaw is the z rotation obtained from rvec (rotation vector)
         #   (ignoring other rotations for now, may need others later)
-        self.x = 5 #TODO: I put these as test values, can set them to None later
+        self.x = 5
         self.y = 4
         self.z = 3
         self.yaw = None # TODO: this is not set in the code, remove or set it, currently using quaternions (Aaron comment)
@@ -58,11 +59,9 @@ class ArucoPublisher(Node):
     #     self.i += 1
 
     def publish_aruco_coords(self):
-        # Get image from camera
         ret, img = self.cap.read()
         h, w, _ = img.shape
 
-        # Grab image and resize
         img = cv2.resize(img, (500, 500), interpolation=cv2.INTER_CUBIC)
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)	#convert the image to grayscale for detection
         corners, ids, rejected = self.detector.detectMarkers(gray)	#detect
@@ -79,8 +78,7 @@ class ArucoPublisher(Node):
                 print(f"ID: {ids[i]}, Rvec: {rvecs[i]}, Tvec: {tvecs[i]}")
             
             cv2.imshow("Image", img)
-            
-            # Stuff that Aaron (me) added:
+
             # setting x, y, and z variables
             self.x, self.y, self.z = tvecs[0,0]
             # setting message to x, y, and z
@@ -110,6 +108,9 @@ class ArucoPublisher(Node):
             # key = cv2.waitKey(1) & 0xFF
             # if key == ord("q"):
             #     break
+        
+        # TODO: Do i need to delete this? not sure if ROS2 already distroys windows when nodes are shut down or not (Aaron comment)
+        # cv2.destroyAllWindows()
 
 #dictionary for tags
 ARUCO_DICT = {
