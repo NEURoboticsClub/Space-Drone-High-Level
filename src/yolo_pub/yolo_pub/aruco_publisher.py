@@ -46,6 +46,7 @@ ARUCO_DICT = {
 }
  
 #display detecting bounding box
+#never referenced to?
 def aruco_display(corners, ids, rejected, image):
 	if len(corners) > 0:
  
