@@ -19,11 +19,8 @@ async def run():
     """ Does Offboard control using position NED coordinates. """
 
     drone = System()
-    # assume using some kind of wireless transmitter for the connection.
 
-    # if you use UDP you cannot be sure that the control packets reaches the UAV, which could cause it to become unstable and crash.
-
-    # If you use TCP you cannot guarantee that the control packets reaches the UAV with regular time intervals, which might cause it become unstable and cause a crash.
+    #UDP or TCP address
     system_address = "udp://:14540"
     await drone.connect(system_address)
 
