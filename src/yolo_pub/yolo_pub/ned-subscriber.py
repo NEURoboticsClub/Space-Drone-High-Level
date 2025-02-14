@@ -11,6 +11,9 @@ non-gps environment.
 """
 
 import asyncio
+from std_msgs.msg import Float32MultiArray
+import rclpy
+from rclpy.node import Node
 
 from mavsdk import System
 from mavsdk.offboard import (OffboardError, PositionNedYaw)
@@ -82,6 +85,37 @@ async def run():
     except OffboardError as error:
         print(f"Stopping offboard mode failed \
                 with error code: {error._result.result}")
+
+class FloatArraySubscriber(Node):
+    def __init__(self):
+        super().__init__('float_array_subscriber')
+        self.subscription = self.create_subscription(
+            Float32MultiArray, 
+            'tag_poses',  
+            self.listener_callback,
+            10)
+        self.subscription  
+
+    def listener_callback(self, msg):
+        float_array = msg.data  # Extracting the float array
+        self.get_logger().info(f'Received data: {float_array}')
+
+        # Access individual elements if needed
+        id_value = float_array[0]
+        x_value = float_array[1]
+        y_value = float_array[2]
+        z_value = float_array[3]
+        rotation_value = float_array[4]
+
+        self.get_logger().info(f'ID: {id_value}, X: {x_value}, Y: {y_value}, Z: {z_value}, Rotation: {rotation_value}')
+
+def main(args=None):
+    rclpy.init(args=args)
+    subscriber = FloatArraySubscriber()
+    rclpy.spin(subscriber)
+
+    subscriber.destroy_node()
+    rclpy.shutdown()
 
 
 if __name__ == "__main__":
