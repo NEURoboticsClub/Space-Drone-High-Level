@@ -54,15 +54,40 @@ async def run():
         print("-- Disarming")
         await drone.action.disarm()
         return
+    
+    # KEYBOARD INtERRUPT SHUTDOWN THINGY: 
 
-    print("-- Stopping offboard")
+    node = FloatArraySubscriber(drone)
+
+    stop_event = asyncio.Event()
+
+    def shutdown_handler(sig, frame):
+        """ Handles keyboard interrupt to stop offboard mode and disarm safely. """
+        print("\n-- KeyboardInterrupt detected! Stopping offboard mode and disarming...")
+        stop_event.set()
+
+    signal.signal(signal.SIGINT, shutdown_handler)
+
+    ros_task = asyncio.create_task(run_ros_node(node, stop_event))
+
     try:
-        await drone.offboard.stop()
-    except OffboardError as error:
-        print(f"Stopping offboard mode failed \
-                with error code: {error._result.result}")
+        await stop_event.wait() 
+    finally:
+        print("-- Stopping offboard mode")
+        try:
+            await drone.offboard.stop()
+        except Exception as error:
+            print(f"Stopping offboard mode failed: {error}")
+
+        print("-- Disarming drone")
+        await drone.action.disarm()
+
+        node.destroy_node()
+        rclpy.shutdown()
+        print("-- Drone and ROS 2 shutdown complete.")
 
 class FloatArraySubscriber(Node):
+    # DRONE MVOEMENT ASYNC FUNCTION:
     async def move_drone(self, x, y, z, yaw):
         try:
             await self.drone.offboard.set_position_ned(PositionNedYaw(x, y, z, yaw))
