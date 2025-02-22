@@ -55,30 +55,6 @@ async def run():
         await drone.action.disarm()
         return
 
-    print("-- Go 0m North, 0m East, -5m Down \
-            within local coordinate system")
-    await drone.offboard.set_position_ned(
-            PositionNedYaw(0.0, 0.0, -5.0, 0.0))
-    await asyncio.sleep(10)
-
-    print("-- Go 5m North, 0m East, -5m Down \
-            within local coordinate system, turn to face East")
-    await drone.offboard.set_position_ned(
-            PositionNedYaw(5.0, 0.0, -5.0, 90.0))
-    await asyncio.sleep(10)
-
-    print("-- Go 5m North, 10m East, -5m Down \
-            within local coordinate system")
-    await drone.offboard.set_position_ned(
-            PositionNedYaw(5.0, 10.0, -5.0, 90.0))
-    await asyncio.sleep(15)
-
-    print("-- Go 0m North, 10m East, 0m Down \
-            within local coordinate system, turn to face South")
-    await drone.offboard.set_position_ned(
-            PositionNedYaw(0.0, 10.0, 0.0, 180.0))
-    await asyncio.sleep(10)
-
     print("-- Stopping offboard")
     try:
         await drone.offboard.stop()
@@ -87,8 +63,16 @@ async def run():
                 with error code: {error._result.result}")
 
 class FloatArraySubscriber(Node):
+    async def move_drone(self, x, y, z, yaw):
+        try:
+            await self.drone.offboard.set_position_ned(PositionNedYaw(x, y, z, yaw))
+            self.get_logger().info(f"Drone moving to X:{x}, Y:{y}, Z:{z}, Yaw:{yaw}")
+        except Exception as e:
+            self.get_logger().error(f"Failed to send PositionNedYaw: {str(e)}")
+
+
     def __init__(self):
-        super().__init__('float_array_subscriber')
+        super().__init__('ned_subscriber')
         self.subscription = self.create_subscription(
             Float32MultiArray, 
             'tag_poses',  
@@ -97,10 +81,9 @@ class FloatArraySubscriber(Node):
         self.subscription  
 
     def listener_callback(self, msg):
-        float_array = msg.data  # Extracting the float array
+        float_array = msg.data  
         self.get_logger().info(f'Received data: {float_array}')
 
-        # Access individual elements if needed
         id_value = float_array[0]
         x_value = float_array[1]
         y_value = float_array[2]
@@ -108,6 +91,9 @@ class FloatArraySubscriber(Node):
         rotation_value = float_array[4]
 
         self.get_logger().info(f'ID: {id_value}, X: {x_value}, Y: {y_value}, Z: {z_value}, Rotation: {rotation_value}')
+
+        asyncio.create_task(self.move_drone(x_value, y_value, z_value, yaw_value))
+
 
 def main(args=None):
     rclpy.init(args=args)
