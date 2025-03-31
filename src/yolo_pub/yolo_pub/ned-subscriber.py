@@ -56,9 +56,9 @@ async def run():
  
 class FloatArraySubscriber(Node):
 	# DRONE MVOEMENT ASYNC FUNCTION:
-	async def move_drone(self, x, y, z, yaw):
+	def move_drone(self, x, y, z, yaw):
 		try:
-			await self.drone.offboard.set_position_ned(PositionNedYaw(x, y, z, yaw))
+			self.drone.offboard.set_position_ned(PositionNedYaw(x, y, z, yaw))
 			self.get_logger().info(f"Drone moving to X:{x}, Y:{y}, Z:{z}, Yaw:{yaw}")
 		except Exception as e:
 			self.get_logger().error(f"Failed to send PositionNedYaw: {str(e)}")
@@ -118,7 +118,7 @@ class FloatArraySubscriber(Node):
  
 		self.get_logger().info(f'ID: {id_value}, X: {x_value}, Y: {y_value}, Z: {z_value}, Rotation: {rotation_value}')
  
-		asyncio.create_task( self.drone.offboard.set_position_ned(PositionNedYaw(x_value, y_value, z_value, rotation_value)))
+		self.move_drone(x_value, y_value, z_value, rotation_value)
 		print('ID: {id_value}, X: {x_value}, Y: {y_value}, Z: {z_value}, Rotation: {rotation_value}')
  
  
