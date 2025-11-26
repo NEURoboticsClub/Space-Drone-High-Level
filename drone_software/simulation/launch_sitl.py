@@ -26,7 +26,7 @@ def start_px4_gazebo():
         process.wait()
 
             if process.returncode == 0:
-            print("Simulation started successfully.")
+                print("Simulation started successfully.")
         else:
             print("Simulation fialed with return code:", process.returncode)
             print("Error output:")
