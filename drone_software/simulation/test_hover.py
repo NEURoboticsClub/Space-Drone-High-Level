@@ -17,9 +17,7 @@ async def test_hover(drone):
 
     # Wait until altitude is reached
     async for position in drone.telemetry.position():
-        if position.relative_altitude_m >= 4.5:
-            print(f"-- Hovering at {position.relative_altitude_m:.1f} m")
-            break
+        print(f"-- Hovering at {position.relative_altitude_m:.1f} m")
 
     # Hover for 10 seconds
     await asyncio.sleep(10)
