@@ -35,7 +35,7 @@ def start_px4_gazebo():
     except Exception as e:
         print("Error occurred while starting PX4 Gazebo:", e)
 
-__name__ == "__main__":
+if __name__ == "__main__":
     start_px4_gazebo()
 
 
