@@ -5,7 +5,7 @@ from mavsdk import System
 
 async def startup_and_arm(drone):
     # Connect to PX4 SITL
-    await drone.connect(system_address="udpin://0.0.0.0:14540")
+    await drone.connect(system_address="udpin://:14540")
 
     print("Waiting for connection...")
     async for state in drone.core.connection_state():
