@@ -4,7 +4,7 @@ from mavsdk import System
 
 
 async def test_hover(drone):
-    await drone.connect(system_address="udpin://:14540")
+    await drone.connect(system_address="udp://:14540")
 
     print("Waiting for connection...")
     async for state in drone.core.connection_state():
